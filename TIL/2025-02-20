@@ -10,6 +10,7 @@ import seaborn as sns
 # ex) sns.set_theme(rc={'figure.figsize': (8, 4)}, style='white')
 # figure.figsize는 그래프의 사이즈, style은 배경색
 # 찾아보니까 style은 'white', 'black', 'whitegrid', 'blackgrid' 사용 가능
+# 'ticks'는 x, y 축에 눈금이 생김
 
 # hue
 # ex) sns.barplot(data=df, x='month', y='total', hue='workingday')
@@ -18,10 +19,65 @@ import seaborn as sns
 # lineplot
 # ex) sns.lineplot(data=df, x='month', y='casual', hue='workingday')
 
- 
+# palette
+# ex) sns.set_theme(rc={'figure.figsize': (8, 4)}, palette='pastel')
+# 기본값은 'deep' / 'pastel', 'muted', 'bright', 'dark', 'colorblind'
 
+#stripplot
+# 범주형 데이터 시각화, 점을 범주형 값에 맞게 뿌려서 표현함
+# 범주형-연속형 변수 간 관계를 점으로 표시, jitter로 겹치는 데이터 분리 가능
+# ex) sns.stripplot(data=df, x='month', y='total', hue='workingday', jitter=True)
 
+    #swarmplot
+    # stripplot의 겹치는 점들을 옆으로 나열
+    # ex) sns.swarmplot(data=df, x='month', y='total', hue='workingday')
 
-# 회귀분석 regplot
+    #violinplot
+    # 분포를 잘 나타내줄 수 있는 바이올린 모양의 시각화 옵션
+    # ex) sns.violinplot(data=df, x="month", y="total")
+        # 바이올린의 아랫쪽에 0 이하까지 분포가 있는 이유?
+        # kde 플롯은 정확한 계산보다는 그냥 분포를 나타낸 것으로
+        # 음수의 값이 나올 확률을 계산하여 표시한 것! 값이 있다는 것 아님
+
+#scatterplot
+# 연속형 데이터 간의 시각화, x,y 축 값에 따라 포인트 위치 결정
+# 상관관계 시각화에 유용, 패턴 탐색
+
+#histplot
+# 한 가지 변수에 대해 빈도를 살펴보는 그래프
+
+    # bins : 막대의 개수
+    # multiple : layer(겹침), stack(쌓음), dodge(비교), fill(비율)
+    # ex) sns.histplot(data=df, x='registered', bins=10, multiple='stack')
+
+#kedplot
+# 표본의 한정된 데이터셋에서 모집단의 확률 밀도 함수 추정
+    # bw_method
+    # 데이터를 얼마나 부드럽게 표현하는지에 대한 옵션
+    # ex) sns.kdeplot(data=df, x='registered', bw_method=0.1)
+
+# regplot 회귀분석
 # ex) sns.regplot(data=df, x='temperature', y='total')
-#     plt.show()
+# ci=False를 더해주면 어떻게 되지?? 해보기
+
+# 피어슨 상관계수
+# 숫자형 변수에 대해서만 값을 구할 수 있음
+# ex) df.corr(numeric_only=True)
+
+    # 정렬
+    # ex) numeric_df.corr()['total'].sort_values(ascending=False)
+    # ascending=True 로 설정하면 상관관계 낮은 순서대로 정렬
+
+    # 히트맵
+    # ex) sns.heatmap(numeric_df.corr())
+    # 진할수록 음, 밝을수록 양의 상관관계가 있다
+
+    # 히트맵 시각화
+    # ex) sns.heatmap(column_corr, annot=True, cmap="coolwarm") 
+    # annot는 상관계수 값 레이블링, 쿨웜은 색설정
+
+    # drop
+    # 특정 열의 상관관계만 추출하고 싶을때, 뺄 것을 drop
+    # ex) column_corr = numeric_df.corr()[["total"]].drop("total", axis=0)
+
+    
