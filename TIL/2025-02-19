@@ -1,0 +1,11 @@
+# 통계 기본 상식
+
+# 데이터프레임의 기본적인 정보
+df.describe() # 범주형 변수는 describe에 include=all 옵션 줘야함
+
+# 기본 연산
+df['a'].mean() # 'a' 컬럼의 평균
+df['b'].quantile(0.25) # 'b' 컬럼의 1사분위수 (중간 0.5, 3사 0.75)
+df['c'].median() # 'c' 컬럼의 중간값
+
+
