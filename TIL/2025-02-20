@@ -1,4 +1,3 @@
-# 회귀분석
-regplot
+# 회귀분석 regplot
 # ex) sns.regplot(data=df, x='temperature', y='total')
-#    plt.show()
+#     plt.show()
