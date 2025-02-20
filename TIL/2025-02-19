@@ -8,4 +8,33 @@ df['a'].mean() # 'a' 컬럼의 평균
 df['b'].quantile(0.25) # 'b' 컬럼의 1사분위수 (중간 0.5, 3사 0.75)
 df['c'].median() # 'c' 컬럼의 중간값
 
+# 박스 형태로 이상치 (kind='box')
+df['english_score'].plot(kind='box')
 
+# 히스토그램 (kind='hist')
+df['height'].plot(kind='hist')
+
+# 특정 컬럼값 카운트 (.value_counts())
+car_df['manufacturer'].value_counts()
+
+# 분산과 표준편차
+  # 편차 : 각 값이 평균에서 얼마나 떨어져 있는지
+  # 제곱하는 이유 : 양수로 만들어 편차가 큰 데이터를 부각
+  # 분산 : body_df['height'].var()
+  # 표준편차 : body_df['hegith'].std()
+    # 분산과 표준편차를 구하는 방식
+        # pandas : n-1(표본). 표본에 대한 분산이 과소 평가되는 경향
+            # describe()에서는 n-1로 나눈 값이 나온다
+        # numpy : n(모집단).
+
+# 컬럼 하나의 전체 값
+df.revenue.sum()
+
+# 부동소수점 : 정수 계산은 상관이 없음
+# but, 소수점이 있는 수라면 round(0.1 + 0.2, 10) 처럼 해결 (적당히 끊음)
+
+# 누적합
+df['revenue'].cumsum()
+
+# 누적곱
+df['multiple'].cumprod()
