@@ -1,17 +1,45 @@
 # 중급 프로젝트 2 협업 일지 (4팀 박은서)
 
 ## 오늘 할 일
-
+* 데이터 개괄적으로 살펴보고 주제 리스트업 하기
+* 테이블 간 관계 ERD 만들어보기
+* 지점 면적 테이블을 통해서 지점 매칭 가능한지 살펴보기
 ## 오늘 한 일
-
+* 데이터 개괄적으로 살펴보고 주제 리스트업 하기
+> 지도학습, 비지도학습 부문에서 각각 결제 전환 예측, 이용자 클러스터링 분석 주제와 사용 가능한 변수를 추렸다.
+* 테이블 간 관계 ERD 만들어보기
+> ERD cloud 사이트를 통해 테이블 간의 관계를 구성해봤다.
+* 지점 면적 테이블을 통해서 지점 매칭 가능한지 살펴보기
+> 평수를 볼 수 있는 건축물대장 등을 확인해봤으나 층 전체가 합산되어 나오고, 매칭되지 않는 경우도 있었으며 조회 자체가 불가능한 경우도 있었다.
 ## 내일 할 일
-
+* 데이터 전처리 해야할 부분 찾아보기
+* 다른 방식으로 지점 면적 테이블 - 지점 매칭 시도해보기
 ## Codes
 ```ruby
+# 각 df에서 중복된 user_uuid만 추출 및 비교
+dup_users_payment = trial_payment['user_uuid'].value_counts()
+dup_users_payment = dup_users_payment[dup_users_payment > 1].index
 
+dup_users_register = trial_register['user_uuid'].value_counts()
+dup_users_register = dup_users_register[dup_users_register > 1].index
+
+set(dup_users_payment) == set(dup_users_register)
+
+
+# 2. 3일체험을 신청한 사람만 일자별 방문을 기록한 데이터인가? (register_df, visit_df)
+# 그렇다면 식별, 아니라면 비식별
+
+# nunique값 다름
+print(trial_register['user_uuid'].nunique(), trial_visit_info['user_uuid'].nunique())
+
+# 완전히 동일한지 확인
+set1 = set(trial_register['user_uuid'])
+set2 = set(trial_visit_info['user_uuid'])
+
+set1 == set2
 ```
 ## Issues & Challenges
-* 문제 :
+* 문제 : 지금 가진 지점 면적 테이블과 기업 페이지 정보로 정량적인 추정을 하는 일이 쉽지 않을 것 같다. 다른 방면의 접근을 고민해봐야겠다.
 ## Notes & Ideas
 * 아이디어 :
 ## Reflection
